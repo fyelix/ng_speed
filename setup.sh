@@ -665,7 +665,7 @@ Not deleting $directory; name is suspiciously short.  Something is wrong."
     run wget "$psol_url"
 
     status "Extracting PSOL..."
-    run tar -xzf -o $(basename "$psol_url")  # extracts to psol/
+    run tar -xzf $(basename "$psol_url") --no-same-owner  # extracts to psol/
   fi
 
   if "$DYNAMIC_MODULE"; then
@@ -726,7 +726,7 @@ Not deleting $directory; name is suspiciously short.  Something is wrong."
       nginx_dir="$BUILDDIR/nginx-${NGINX_VERSION}/"
       delete_if_already_exists "$nginx_dir"
       status "Extracting nginx..."
-      run tar -xzf -o "$nginx_fname" --directory "$BUILDDIR"
+      run tar -xzf  "$nginx_fname" --directory "$BUILDDIR" --no-same-owner
       configure_location="."
     fi
     run cd "$nginx_dir"
